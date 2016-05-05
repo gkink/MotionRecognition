@@ -8,7 +8,7 @@
 
 #include "GestureEvent.hpp"
 
-GestureEvent::GestureEvent(ProcessingUnit source, bool valid, int id, double probability) {
+GestureEvent::GestureEvent(ProcessingUnit* source, bool valid, int id, double probability) {
     this->analyzer = source;
     this->valid = valid;
     this->id = id;
@@ -27,6 +27,6 @@ double GestureEvent::getProbability() {
     return this->probability;
 }
 
-ProcessingUnit GestureEvent::getSource() {
+ProcessingUnit* GestureEvent::getSource() {
     return this->analyzer;
 }

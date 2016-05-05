@@ -13,3 +13,6 @@ void TriggeredProcessingUnit::buttonPressReceived(ButtonPressedEvent event){}
 void TriggeredProcessingUnit::buttonReleaseReceived(ButtonReleasedEvent event){}
 void TriggeredProcessingUnit::motionStartReceived(MotionStartEvent event){}
 void TriggeredProcessingUnit::motionStopReceived(MotionStopEvent event){}
+
+void TriggeredProcessingUnit::loadGesture(string filename){}
+void TriggeredProcessingUnit::saveGesture(int id, string filename){}

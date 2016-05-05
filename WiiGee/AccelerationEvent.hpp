@@ -9,9 +9,6 @@
 #ifndef AccelerationEvent_hpp
 #define AccelerationEvent_hpp
 
-#include <stdio.h>
-#include "Device.hpp"
-
 class AccelerationEvent {
     /**
      * Create an AccelerationEvent with a specific source,

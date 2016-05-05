@@ -9,7 +9,6 @@
 #ifndef Quantizer_hpp
 #define Quantizer_hpp
 
-#include <stdio.h>
 #include "Gesture.hpp"
 #include <vector>
 

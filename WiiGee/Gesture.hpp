@@ -9,7 +9,6 @@
 #ifndef Gesture_hpp
 #define Gesture_hpp
 
-#include <stdio.h>
 #include <vector>
 #include "AccelerationEvent.hpp"
 

@@ -10,6 +10,7 @@
 #define GestureListener_hpp
 
 #include "GestureEvent.hpp"
+#include <memory>
 
 class GestureListener {
     
@@ -20,7 +21,7 @@ class GestureListener {
      * the recognized gesture.
      */
 public:
-   virtual void gestureReceived(GestureEvent event) = 0;
+   virtual void gestureReceived(shared_ptr<GestureEvent> event) = 0;
 };
 
 #endif /* GestureListener_hpp */

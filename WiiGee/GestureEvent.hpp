@@ -20,17 +20,17 @@ class GestureEvent {
      * @param probability The Bayes-Classifier calculated probability.
      */
 public:
-    GestureEvent(ProcessingUnit source, bool valid, int id, double probability);
+    GestureEvent(ProcessingUnit* source, bool valid, int id, double probability);
     int getId();
     bool isValid();
     double getProbability();
-    ProcessingUnit getSource();
+    ProcessingUnit* getSource();
     
 private:
     int id;
     bool valid;
     double probability;
-    ProcessingUnit analyzer;
+    ProcessingUnit* analyzer;
 };
 
 

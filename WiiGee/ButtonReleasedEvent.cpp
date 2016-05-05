@@ -8,7 +8,7 @@
 
 #include "ButtonReleasedEvent.hpp"
 
-ButtonReleasedEvent::ButtonReleasedEvent(Device source, int button) {
+ButtonReleasedEvent::ButtonReleasedEvent(int button) {
     this->button = button;
 }
 

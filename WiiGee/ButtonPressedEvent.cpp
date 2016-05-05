@@ -8,14 +8,14 @@
 
 #include "ButtonPressedEvent.hpp"
 
-ButtonPressedEvent::ButtonPressedEvent(Device& source, int button) {
+ButtonPressedEvent::ButtonPressedEvent(Device* source, int button) {
         this->button = button;
         
-        if(source.getRecognitionButton() == button) {
+        if(source->getRecognitionButton() == button) {
             this->recognitionbutton = true;
-        } else if(source.getTrainButton() == button) {
+        } else if(source->getTrainButton() == button) {
             this->trainbutton = true;
-        } else if(source.getCloseGestureButton() == button) {
+        } else if(source->getCloseGestureButton() == button) {
             this->closegesturebutton = true;
         }
     }

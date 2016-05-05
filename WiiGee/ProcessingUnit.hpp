@@ -30,12 +30,8 @@ public:
     virtual void motionStartReceived(MotionStartEvent event) = 0;
     virtual void motionStopReceived(MotionStopEvent event) = 0;
     
-    virtual void accelerationReceived(AccelerationEvent event) = 0;
-    virtual void motionStartReceived(MotionStartEvent event) = 0;
-    virtual void motionStopReceived(MotionStopEvent event) = 0;
-    
-    virtual void buttonPressReceived(ButtonPressedEvent event) = 0;
-    virtual void buttonReleaseReceived(ButtonReleasedEvent event) = 0;
+    virtual void loadGesture(string filename) = 0;
+    virtual void saveGesture(int id, string filename) = 0;
     
     void reset();
     

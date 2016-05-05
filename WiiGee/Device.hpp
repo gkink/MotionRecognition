@@ -18,6 +18,7 @@
 #include "ProcessingUnit.hpp"
 #include "TriggeredProcessingUnit.hpp"
 #include "ProcessingUnit.hpp"
+#include <string>
 
 using namespace std;
 
@@ -44,7 +45,7 @@ public:
     int getTrainButton() { return this->trainbutton; }
     void setTrainButton(int b) { this->trainbutton = b; }
     int getCloseGestureButton() {return this->closegesturebutton; }
-    void setCloseGestureButton(int b) { return this->closegesturebutton; }
+    void setCloseGestureButton(int b) { this->closegesturebutton = b; }
     void setAccelerationEnabled(bool enabled) { this->accelerationEnabled = enabled; }
     void loadGesture(string filename) { this->processingunit->loadGesture(filename); }
     void saveGesture(int id, string filename) {this->processingunit->saveGesture(id, filename); }

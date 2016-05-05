@@ -9,8 +9,6 @@
 #ifndef ActionStartEvent_hpp
 #define ActionStartEvent_hpp
 
-#include <stdio.h>
-
 class ActionStartEvent {
     
 protected:

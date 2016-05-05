@@ -9,14 +9,12 @@
 #ifndef ButtonReleasedEvent_hpp
 #define ButtonReleasedEvent_hpp
 
-#include <stdio.h>
-#include "Device.hpp"
 #include "ActionStopEvent.hpp"
 
 class ButtonReleasedEvent: public ActionStopEvent {
     
 public:
-    ButtonReleasedEvent(Device source, int button);
+    ButtonReleasedEvent(int button);
     int getButton();
     
 private:

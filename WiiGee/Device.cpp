@@ -27,7 +27,7 @@ Device::Device(bool autofiltering){
 }
 
 void Device::addAccelerationFilter(unique_ptr<Filter> filter){
-    this->accFilters.push_back(filter);
+    this->accfilters.push_back(filter);
 }
 
 void Device::addAccelerationListener(unique_ptr<AccelerationListener> listener){
@@ -50,7 +50,7 @@ void Device::addButtonListener(unique_ptr<ButtonListener> listener){
 
 void Device::fireAccelerationEvent(vector<double>& vec){
     for (int i = 0; i < this->accfilters.size(); i++) {
-        vec= this->accfilters.get(i).filter(vec);
+        vec= this->accfilters.at(i)->filter(vec);
         // cannot return here if null, because of time-dependent accfilters
     }
     
@@ -62,20 +62,20 @@ void Device::fireAccelerationEvent(vector<double>& vec){
         //shared pointer aris sachiro
         shared_ptr<AccelerationEvent> w(new AccelerationEvent(vec[0], vec[1], vec[2], absvalue));
         for (int i = 0; i < this->accelerationlistener.size(); i++) {
-            this->accelerationlistener.get(i).accelerationReceived(w);
+            this->accelerationlistener.at(i)->accelerationReceived(w);
         }
     }
 }
 
 void Device::fireButtonPressedEvent(int button){
 //    System.out.println(Quantizer::PI);
-    ButtonPressedEvent w = new ButtonPressedEvent(this, button);
+    shared_ptr<ButtonPressedEvent> w(new ButtonPressedEvent(this, button));
     for (int i = 0; i < this->buttonlistener.size(); i++) {
-        this.buttonlistener.get(i).buttonPressReceived(w);
+        this->buttonlistener.at(i)->buttonPressReceived(w);
     }
     
-    if (w.isRecognitionInitEvent() || w.isTrainInitEvent()) {
-        this.resetAccelerationFilters();
+    if (w->isRecognitionInitEvent() || w->isTrainInitEvent()) {
+        this->resetAccelerationFilters();
     }
 }
 

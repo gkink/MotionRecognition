@@ -8,13 +8,13 @@
 
 #include "MotionStartEvent.hpp"
 
-MotionStartEvent::MotionStartEvent(Device source) {
+MotionStartEvent::MotionStartEvent(Device* source) {
     
-    if (source.getRecognitionButton() == Device::MOTION) {
+    if (source->getRecognitionButton() == Device::MOTION) {
         this->recognitionbutton = true;
-    } else if(source.getTrainButton() == Device::MOTION) {
+    } else if(source->getTrainButton() == Device::MOTION) {
         this->trainbutton = true;
-    } else if(source.getCloseGestureButton() == Device::MOTION) {
+    } else if(source->getCloseGestureButton() == Device::MOTION) {
         this->closegesturebutton = true;
     }
 }

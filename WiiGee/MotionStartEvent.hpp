@@ -9,14 +9,13 @@
 #ifndef MotionStartEvent_hpp
 #define MotionStartEvent_hpp
 
-#include <stdio.h>
 #include "ActionStartEvent.hpp"
 #include "Device.hpp"
 
 class MotionStartEvent: public ActionStartEvent {
     
 public:    
-    MotionStartEvent(Device source);
+    MotionStartEvent(Device* source);
     bool isTrainInitEvent();
     bool isCloseGestureInitEvent();
     bool isRecognitionInitEvent();

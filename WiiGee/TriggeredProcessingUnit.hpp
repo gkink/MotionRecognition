@@ -20,6 +20,9 @@ class TriggeredProcessingUnit: public ProcessingUnit{
     virtual void motionStartReceived(MotionStartEvent event);
     virtual void motionStopReceived(MotionStopEvent event);
     
+    virtual void loadGesture(string filename);
+    virtual void saveGesture(int id, string filename);
+    
 };
 
 #endif /* TriggeredProcessingUnit_hpp */

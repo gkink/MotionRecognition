@@ -9,6 +9,8 @@
 #ifndef MotionStopEvent_hpp
 #define MotionStopEvent_hpp
 
-class MotionStopEvent {};
+#include "ActionStopEvent.hpp"
+
+class MotionStopEvent: public ActionStopEvent{};
 
 #endif /* MotionStopEvent_hpp */

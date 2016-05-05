@@ -9,7 +9,6 @@
 #ifndef ButtonPressedEvent_hpp
 #define ButtonPressedEvent_hpp
 
-#include <stdio.h>
 #include "Device.hpp"
 #include "ActionStartEvent.hpp"
 
@@ -37,7 +36,7 @@ public:
      * @param source
      * @param button
      */
-    ButtonPressedEvent(Device& source, int button);
+    ButtonPressedEvent(Device* source, int button);
     int getButton();
     
 private:

@@ -9,10 +9,10 @@
 #ifndef AccelerationListener_hpp
 #define AccelerationListener_hpp
 
-#include <stdio.h>
 #include "AccelerationEvent.hpp"
 #include "MotionStopEvent.hpp"
 #include "MotionStartEvent.hpp"
+#include <memory>
 
 class AccelerationListener {
     
@@ -22,7 +22,7 @@ public:
      *
      * @param event The acceleration representation as an event.
      */
-    virtual void accelerationReceived(AccelerationEvent event) = 0;
+    virtual void accelerationReceived(shared_ptr<AccelerationEvent> event) = 0;
     
     /**
      * This method would be called if a Device is in idle state and then a
@@ -33,7 +33,7 @@ public:
      * in motion or not.
      */
 
-    virtual void motionStartReceived(MotionStartEvent event) = 0;
+    virtual void motionStartReceived(shared_ptr<MotionStartEvent> event) = 0;
     
     /**
      * This method would be called if a Device is in motion and then the motion
@@ -42,7 +42,7 @@ public:
      * @param event This is the event which contains if the Device is now
      * in motion or not.
      */
-    virtual void motionStopReceived(MotionStopEvent event) = 0;
+    virtual void motionStopReceived(shared_ptr<MotionStopEvent> event) = 0;
     
 };
 #endif /* AccelerationListener_hpp */

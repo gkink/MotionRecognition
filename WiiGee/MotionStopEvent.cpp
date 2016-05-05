@@ -6,5 +6,4 @@
 //  Copyright © 2016 Nextep-3. All rights reserved.
 //
 
-#include <stdio.h>
 #include "MotionStopEvent.hpp"
