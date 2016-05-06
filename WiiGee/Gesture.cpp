@@ -18,7 +18,7 @@ Gesture::Gesture(Gesture &original){
     }
 }
 
-void Gesture::add(AccelerationEvent event){
+void Gesture::add(shared_ptr<AccelerationEvent> event){
     this->data.push_back(event);
 }
 

@@ -7,6 +7,7 @@
 //
 
 #include "ButtonPressedEvent.hpp"
+#include "Device.hpp"
 
 ButtonPressedEvent::ButtonPressedEvent(Device* source, int button) {
         this->button = button;

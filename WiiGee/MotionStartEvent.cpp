@@ -7,6 +7,7 @@
 //
 
 #include "MotionStartEvent.hpp"
+#include "Device.hpp"
 
 MotionStartEvent::MotionStartEvent(Device* source) {
     

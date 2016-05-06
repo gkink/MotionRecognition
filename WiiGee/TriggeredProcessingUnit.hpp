@@ -9,19 +9,30 @@
 #ifndef TriggeredProcessingUnit_hpp
 #define TriggeredProcessingUnit_hpp
 
-#include <stdio.h>
 #include "ProcessingUnit.hpp"
+#include <string>
+
+using namespace std;
 
 class TriggeredProcessingUnit: public ProcessingUnit{
-    ~TriggeredProcessingUnit() {};
-    virtual void accelerationReceived(AccelerationEvent event);
-    virtual void buttonPressReceived(ButtonPressedEvent event);
-    virtual void buttonReleaseReceived(ButtonReleasedEvent event);
-    virtual void motionStartReceived(MotionStartEvent event);
-    virtual void motionStopReceived(MotionStopEvent event);
     
-    virtual void loadGesture(string filename);
-    virtual void saveGesture(int id, string filename);
+public:
+    TriggeredProcessingUnit();
+    ~TriggeredProcessingUnit() {};
+    virtual void accelerationReceived(std::shared_ptr<AccelerationEvent> event) override;
+    virtual void buttonPressReceived(std::shared_ptr<ButtonPressedEvent> event) override {};
+    virtual void buttonReleaseReceived(std::shared_ptr<ButtonReleasedEvent> event) override {};
+    virtual void motionStartReceived(std::shared_ptr<MotionStartEvent> event) override {};
+    virtual void motionStopReceived(std::shared_ptr<MotionStopEvent> event) override{};
+    
+    virtual void loadGesture(string filename) override{};
+    virtual void saveGesture(int id, string filename) override{};
+    
+private:
+    shared_ptr<Gesture> current{new Gesture()};
+    vector<shared_ptr<Gesture>> trainsequence;
+    bool learning;
+    bool analyzing;
     
 };
 

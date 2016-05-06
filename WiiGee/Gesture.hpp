@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "AccelerationEvent.hpp"
+#include <memory>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ class Gesture{
 public:
     Gesture(){}
     Gesture(Gesture &original);
-    void add(AccelerationEvent event);
+    void add(shared_ptr<AccelerationEvent> event);
     AccelerationEvent getLastData();
     vector<AccelerationEvent> &getData();
     void removeFirstData();
@@ -32,7 +33,7 @@ private:
     bool minmaxmanual;
     double minacc;
     double maxacc;
-    vector<AccelerationEvent> data;
+    vector<shared_ptr<AccelerationEvent>> data;
 };
 
 #endif /* Gesture_hpp */

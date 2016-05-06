@@ -21,7 +21,7 @@ class GestureListener {
      * the recognized gesture.
      */
 public:
-   virtual void gestureReceived(shared_ptr<GestureEvent> event) = 0;
+   virtual void gestureReceived(std::shared_ptr<GestureEvent> event) = 0;
 };
 
 #endif /* GestureListener_hpp */

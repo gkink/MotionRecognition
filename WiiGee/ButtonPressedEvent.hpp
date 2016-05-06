@@ -9,7 +9,8 @@
 #ifndef ButtonPressedEvent_hpp
 #define ButtonPressedEvent_hpp
 
-#include "Device.hpp"
+class Device;
+
 #include "ActionStartEvent.hpp"
 
 class ButtonPressedEvent: public ActionStartEvent {

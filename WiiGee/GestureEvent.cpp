@@ -7,6 +7,8 @@
 //
 
 #include "GestureEvent.hpp"
+//#include "ProcessingUnit.hpp" es ar vici aris tu ara savaldebulo
+
 
 GestureEvent::GestureEvent(ProcessingUnit* source, bool valid, int id, double probability) {
     this->analyzer = source;

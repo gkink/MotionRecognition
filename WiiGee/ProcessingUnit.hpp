@@ -9,7 +9,6 @@
 #ifndef ProcessingUnit_hpp
 #define ProcessingUnit_hpp
 
-#include <stdio.h>
 #include "Classifier.hpp"
 #include "GestureListener.hpp"
 #include <vector>
@@ -18,17 +17,18 @@
 #include "MotionStartEvent.hpp"
 #include "MotionStopEvent.hpp"
 #include "AccelerationListener.hpp"
+#include "ButtonListener.hpp"
+#include <memory>
 
 class ProcessingUnit: public AccelerationListener, public ButtonListener{
 public:
-    ProcessingUnit();
-    virtual ~ProcessingUnit() {};
-    void addGestureListener(GestureListener g);
-    virtual void accelerationReceived(AccelerationEvent event) = 0;
-    virtual void buttonPressReceived(ButtonPressedEvent event) = 0;
-    virtual void buttonReleaseReceived(ButtonReleasedEvent event) = 0;
-    virtual void motionStartReceived(MotionStartEvent event) = 0;
-    virtual void motionStopReceived(MotionStopEvent event) = 0;
+    virtual ~ProcessingUnit() {}
+    void addGestureListener(std::shared_ptr<GestureListener> g);
+    virtual void accelerationReceived(std::shared_ptr<AccelerationEvent> event) override = 0;
+    virtual void buttonPressReceived(std::shared_ptr<ButtonPressedEvent> event)  override = 0;
+    virtual void buttonReleaseReceived(std::shared_ptr<ButtonReleasedEvent> event) override = 0;
+    virtual void motionStartReceived(std::shared_ptr<MotionStartEvent> event) override = 0;
+    virtual void motionStopReceived(std::shared_ptr<MotionStopEvent> event) override = 0;
     
     virtual void loadGesture(string filename) = 0;
     virtual void saveGesture(int id, string filename) = 0;
@@ -40,7 +40,7 @@ protected:
     void fireGestureEvent(bool valid, int id, double probability);
     
 private:
-    vector<GestureListener> gesturelistener;
+    vector<std::shared_ptr<GestureListener>> gesturelistener;
 };
 
 #endif /* ProcessingUnit_hpp */

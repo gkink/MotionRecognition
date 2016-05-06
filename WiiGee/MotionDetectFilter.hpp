@@ -9,9 +9,10 @@
 #ifndef MotionDetectFilter_hpp
 #define MotionDetectFilter_hpp
 
+class Device;
+
 #include <stdio.h>
 #include "Filter.hpp"
-#include "Device.hpp"
 
 class MotionDetectFilter: public Filter{
     

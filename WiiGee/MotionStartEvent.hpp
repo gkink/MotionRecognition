@@ -9,8 +9,9 @@
 #ifndef MotionStartEvent_hpp
 #define MotionStartEvent_hpp
 
+class Device;
+
 #include "ActionStartEvent.hpp"
-#include "Device.hpp"
 
 class MotionStartEvent: public ActionStartEvent {
     

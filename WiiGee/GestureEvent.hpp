@@ -9,8 +9,10 @@
 #ifndef GestureEvent_hpp
 #define GestureEvent_hpp
 
+class ProcessingUnit;
+
 #include <stdio.h>
-#include "ProcessingUnit.hpp"
+
 
 class GestureEvent {
     /** Create a GestureEvent

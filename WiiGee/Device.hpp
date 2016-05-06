@@ -9,12 +9,12 @@
 #ifndef Device_hpp
 #define Device_hpp
 
-#include <stdio.h>
+class ButtonListener;
+
 #include <vector>
 #include <memory>
 #include "Filter.hpp"
 #include "AccelerationListener.hpp"
-#include "ButtonListener.hpp"
 #include "ProcessingUnit.hpp"
 #include "TriggeredProcessingUnit.hpp"
 #include "ProcessingUnit.hpp"
@@ -29,9 +29,9 @@ public:
     
     Device(bool autofiltering);
     void addAccelerationFilter(unique_ptr<Filter> filter);
-    void addAccelerationListener(unique_ptr<AccelerationListener> listener);
+    void addAccelerationListener(shared_ptr<AccelerationListener> listener);
     void resetAccelerationFilters();
-    void addButtonListener(unique_ptr<ButtonListener> listener);
+    void addButtonListener(shared_ptr<ButtonListener> listener);
     void addGestureListener(unique_ptr<GestureListener> listener);
     
     void fireMotionStopEvent();
@@ -58,10 +58,10 @@ protected:
     bool accelerationEnabled;
    
     vector<unique_ptr<Filter>> accfilters;
-    vector<unique_ptr<AccelerationListener>> accelerationlistener;
-    vector<unique_ptr<ButtonListener>> buttonlistener;
+    vector<shared_ptr<AccelerationListener>> accelerationlistener;
+    vector<shared_ptr<ButtonListener>> buttonlistener;
     
-    unique_ptr<ProcessingUnit> processingunit{new TriggeredProcessingUnit()};
+    shared_ptr<ProcessingUnit> processingunit{new TriggeredProcessingUnit()};
 };
 
 #endif /* Device_hpp */

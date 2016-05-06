@@ -6,6 +6,7 @@
 //  Copyright © 2016 Nextep-3. All rights reserved.
 //
 
+#include "Device.hpp"
 #include "MotionDetectFilter.hpp"
 #include <chrono>
 
