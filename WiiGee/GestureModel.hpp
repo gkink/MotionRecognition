@@ -17,14 +17,13 @@ class GestureModel{
 
 public:
     GestureModel();
-    void train(vector<Gesture>& trainsequence);
-    double matches(Gesture &gesture);
+    void train(vector<shared_ptr<Gesture>> trainsequence);
+    double matches(shared_ptr<Gesture> gesture);
     void printMap();
     void print();
     int getNumStates();
     int getNumObservations();
     double getDefaultProbability();
-    void setDefaultProbability(vector<Gesture>& defsequence);
     void setDefaultProbability(double prob);
     Quantizer getQuantizer();
     void setQuantizer(Quantizer &q);
@@ -37,6 +36,7 @@ private:
     Quantizer quantizer{8};//maybe pointer is a better idea!!
     HMM markovmodell{8, 14};
     double defaultprobability;
+    void setDefaultProbability(vector<shared_ptr<Gesture>>& defsequence);
 };
 
 #endif /* GestureModel_hpp */

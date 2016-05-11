@@ -19,12 +19,12 @@ class Gesture{
 
 public:
     Gesture(){}
-    Gesture(Gesture &original);
+    Gesture(shared_ptr<Gesture> original);
     void add(shared_ptr<AccelerationEvent> event);
-    AccelerationEvent getLastData();
-    vector<AccelerationEvent> &getData();
+    shared_ptr<AccelerationEvent> getLastData();
+    vector<shared_ptr<AccelerationEvent>> &getData();
     void removeFirstData();
-    size_t getCountData();
+    size_t getCountOfData();
     void setMaxAndMinAcceleration(double max, double min);
     double getMaxAcceleration();
     double getMinAcceleration();

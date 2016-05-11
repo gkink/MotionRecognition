@@ -13,30 +13,30 @@ GestureModel::GestureModel(){
     this->numObservations = 14;
 }
 
-void GestureModel::train(vector<Gesture>& trainsequence) {
+void GestureModel::train(vector<shared_ptr<Gesture>> trainsequence) {
     // summarize all vectors from the different gestures in one
     // gesture called sum.
     double maxacc = 0;
     double minacc = 0;
-    Gesture sum;
+    shared_ptr<Gesture> sum(new Gesture());
     
     for(int i = 0; i < trainsequence.size(); i++) {
-        vector<AccelerationEvent> t = trainsequence[i].getData();
+        vector<shared_ptr<AccelerationEvent>> t = trainsequence[i]->getData();
         
         // add the max and min acceleration, we later get the average
-        maxacc+=trainsequence[i].getMaxAcceleration();
-        minacc+=trainsequence[i].getMinAcceleration();
+        maxacc+=trainsequence[i]->getMaxAcceleration();
+        minacc+=trainsequence[i]->getMinAcceleration();
         
         // transfer every single accelerationevent of each gesture to
         // the new gesture sum
-        for(int j=0; j<trainsequence[i].getData().size(); j++) {
-            sum.add(t[j]);
+        for(int j=0; j<trainsequence[i]->getData().size(); j++) {
+            sum->add(t[j]);
         }
         
     }
     
     // get the average and set it to the sum gesture
-    sum.setMaxAndMinAcceleration(maxacc/trainsequence.size(), minacc/trainsequence.size());
+    sum->setMaxAndMinAcceleration(maxacc/trainsequence.size(), minacc/trainsequence.size());
     
     // train the centeroids of the quantizer with this master gesture sum.
     this->quantizer.trainCentroids(sum);
@@ -54,7 +54,7 @@ void GestureModel::train(vector<Gesture>& trainsequence) {
     this->setDefaultProbability(trainsequence);
 }
 
-double GestureModel::matches(Gesture &gesture) {
+double GestureModel::matches(shared_ptr<Gesture> gesture) {
     vector<int> sequence = quantizer.getObservationSequence(gesture);
     return this->markovmodell.getProbability(sequence);
 }
@@ -83,7 +83,7 @@ double GestureModel::getDefaultProbability(){
     return this->defaultprobability;
 }
 
-void GestureModel::setDefaultProbability(vector<Gesture>& defsequence){
+void GestureModel::setDefaultProbability(vector<shared_ptr<Gesture>>& defsequence){
     double prob = 0;
     for(int i=0; i<defsequence.size(); i++) {
         prob+=this->matches(defsequence[i]);

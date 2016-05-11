@@ -13,14 +13,14 @@ Classifier::Classifier(){
     this->lastprob = 0.0;
 }
 
-int Classifier::classifyGesture(Gesture g) {
+int Classifier::classifyGesture(shared_ptr<Gesture> g) {
     //Log.write("Recognizing gesture...");
     
     // Wert im Nenner berechnen, nach Bayes
     double sum = 0;
     for(int i=0; i<this->gesturemodel.size(); i++) {
-        sum+=this->gesturemodel[i].getDefaultProbability()*
-        this->gesturemodel[i].matches(g);
+        sum+=this->gesturemodel[i]->getDefaultProbability()*
+        this->gesturemodel[i]->matches(g);
     }
     
     int recognized = -1; // which gesture has been recognized
@@ -29,8 +29,8 @@ int Classifier::classifyGesture(Gesture g) {
     double probmodel = 0; // temporal value for bayes algorithm
     for(int i=0; i<this->gesturemodel.size(); i++) {
         //this.gesturemodel.elementAt(i).print(); // Debug
-        double tmpgesture = this->gesturemodel[i].matches(g);
-        double tmpmodel = this->gesturemodel[i].getDefaultProbability();
+        double tmpgesture = this->gesturemodel[i]->matches(g);
+        double tmpmodel = this->gesturemodel[i]->getDefaultProbability();
         
         if(((tmpmodel*tmpgesture)/sum)>recogprob) {
             probgesture=tmpgesture;
@@ -55,15 +55,15 @@ double Classifier::getLastProbability(){
     return this->lastprob;
 }
 
-void Classifier::addGestureModel(GestureModel gm){
+void Classifier::addGestureModel(shared_ptr<GestureModel> gm){
     this->gesturemodel.push_back(gm);
 }
 
-GestureModel Classifier::getGestureModel(int id){
+shared_ptr<GestureModel> Classifier::getGestureModel(int id){
     return this->gesturemodel[id];
 }
 
-vector<GestureModel> Classifier::getGestureModels(){
+vector<shared_ptr<GestureModel>> Classifier::getGestureModels(){
     return this->gesturemodel;
 }
 

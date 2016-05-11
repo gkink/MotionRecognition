@@ -20,10 +20,10 @@ Quantizer::Quantizer(int numSt): numStates{numSt}, maptrained{false} {
 }
 
 
-void Quantizer::trainCentroids(Gesture &gesture){
-    vector<AccelerationEvent> data = gesture.getData();
+void Quantizer::trainCentroids(shared_ptr<Gesture> gesture){
+    vector<shared_ptr<AccelerationEvent>> data = gesture->getData();
     double pi = PI;
-    this->radius = (gesture.getMaxAcceleration() + gesture.getMinAcceleration()) / 2;
+    this->radius = (gesture->getMaxAcceleration() + gesture->getMinAcceleration()) / 2;
     //log write is needded!!!!!!!!!!(see java code!!!)
     
     if (!this->maptrained){
@@ -60,9 +60,9 @@ void Quantizer::trainCentroids(Gesture &gesture){
             int nenner = 0;
             for (int j = 0; j < data.size(); j++) {
                 if (g[i][j] == 1) {
-                    zaehlerX += data[j].getX();
-                    zaehlerY += data[j].getY();
-                    zaehlerZ += data[j].getZ();
+                    zaehlerX += data[j]->getX();
+                    zaehlerY += data[j]->getY();
+                    zaehlerZ += data[j]->getZ();
                     nenner++;
                 }
             }
@@ -81,9 +81,9 @@ void Quantizer::trainCentroids(Gesture &gesture){
 }
 
 
-vector<vector<int>> Quantizer::deriveGroups(Gesture &gesture) {
+vector<vector<int>> Quantizer::deriveGroups(shared_ptr<Gesture> gesture) {
     
-    vector<AccelerationEvent> data = gesture.getData();
+    vector<shared_ptr<AccelerationEvent>> data = gesture->getData();
     vector<vector<int>> groups(MAP_NUMBER_OF_ROWS, vector<int>(data.size()));
     
     // Calculate cartesian distance
@@ -95,9 +95,9 @@ vector<vector<int>> Quantizer::deriveGroups(Gesture &gesture) {
         vector<double> ref = this->map[i];
         for (int j = 0; j < data.size(); j++) { // spalten
             
-            curr[0] = data[j].getX();
-            curr[1] = data[j].getY();
-            curr[2] = data[j].getZ();
+            curr[0] = data[j]->getX();
+            curr[1] = data[j]->getY();
+            curr[2] = data[j]->getZ();
             
             vect[0] = ref[0] - curr[0];
             vect[1] = ref[1] - curr[1];
@@ -125,7 +125,7 @@ vector<vector<int>> Quantizer::deriveGroups(Gesture &gesture) {
 }
 
 
-vector<int> Quantizer::getObservationSequence(Gesture &gesture){
+vector<int> Quantizer::getObservationSequence(shared_ptr<Gesture> gesture){
     
     vector<vector<int>> groups = this->deriveGroups(gesture);
     vector<int> sequence;

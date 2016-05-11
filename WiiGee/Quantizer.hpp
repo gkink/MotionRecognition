@@ -30,9 +30,9 @@ private:
 public:
     constexpr static const double PI = 3.141592653589793;
     Quantizer(int numSt);
-    void trainCentroids(Gesture &gesture);
-    vector<vector<int>> deriveGroups(Gesture &gesture);
-    vector<int> getObservationSequence(Gesture &gesture);
+    void trainCentroids(shared_ptr<Gesture> gesture);
+    vector<vector<int>> deriveGroups(shared_ptr<Gesture> gesture);
+    vector<int> getObservationSequence(shared_ptr<Gesture> gesture);
     void printMap();
     double getRadius();
     vector<vector<double>>& getHashMap();

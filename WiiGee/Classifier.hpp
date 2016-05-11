@@ -19,16 +19,16 @@ class Classifier{
     
 public:
     Classifier();
-    int classifyGesture(Gesture g);
+    int classifyGesture(shared_ptr<Gesture> g);
     double getLastProbability();
-    void addGestureModel(GestureModel gm);
-    GestureModel getGestureModel(int id);
-    vector<GestureModel> getGestureModels();
+    void addGestureModel(shared_ptr<GestureModel> gm);
+    shared_ptr<GestureModel> getGestureModel(int id);
+    vector<shared_ptr<GestureModel>> getGestureModels();
     size_t getCountOfGestures();
     void clear();
     
 private:
-    vector<GestureModel> gesturemodel;
+    vector<shared_ptr<GestureModel>> gesturemodel;
     double lastprob;
     
 };
