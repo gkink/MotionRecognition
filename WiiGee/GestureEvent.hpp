@@ -23,6 +23,7 @@ class GestureEvent {
      */
 public:
     GestureEvent(ProcessingUnit* source, bool valid, int id, double probability);
+    ~GestureEvent() {}
     int getId();
     bool isValid();
     double getProbability();

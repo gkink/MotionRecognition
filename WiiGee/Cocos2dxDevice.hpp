@@ -9,9 +9,9 @@
 #ifndef Cocos2dxDevice_hpp
 #define Cocos2dxDevice_hpp
 
-#include "Device.hpp"
+#include "GeneralDevice.hpp"
 
-class Cocos2dxDevice: public Device{
+class Cocos2dxDevice: public GeneralDevice{
 public:
     void onSensorChanged(double x, double y, double z);
 };

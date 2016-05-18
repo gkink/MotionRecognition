@@ -7,9 +7,9 @@
 //
 
 #include "ButtonPressedEvent.hpp"
-#include "Device.hpp"
+#include "GeneralDevice.hpp"
 
-ButtonPressedEvent::ButtonPressedEvent(Device* source, int button) {
+ButtonPressedEvent::ButtonPressedEvent(GeneralDevice* source, int button) {
         this->button = button;
         
         if(source->getRecognitionButton() == button) {

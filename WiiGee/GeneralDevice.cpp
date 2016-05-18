@@ -1,52 +1,50 @@
 //
-//  Device.cpp
+//  GeneralDevice.cpp
 //  WiiGee
 //
 //  Created by Nextep-3 on 19.04.16.
 //  Copyright © 2016 Nextep-3. All rights reserved.
 //
 
-#include "Device.hpp"
+#include "GeneralDevice.hpp"
 #include "IdleStateFilter.hpp"
-#include "MotionDetectFilter.hpp"
 #include "DirectionalEquivalenceFilter.hpp"
 #include "ButtonListener.hpp"
 #include <math.h>
 #include "Quantizer.hpp"
 
-Device::Device(bool autofiltering){
+GeneralDevice::GeneralDevice(bool autofiltering){
     if (autofiltering) {
         this->addAccelerationFilter(unique_ptr<IdleStateFilter>( new IdleStateFilter()));
-        this->addAccelerationFilter(unique_ptr<MotionDetectFilter>(new MotionDetectFilter(this)));
         this->addAccelerationFilter(unique_ptr<DirectionalEquivalenceFilter>(new DirectionalEquivalenceFilter()));
     }
     this->addAccelerationListener(this->processingunit);
     this->addButtonListener(this->processingunit);
 }
 
-void Device::addAccelerationFilter(unique_ptr<Filter> filter){
+void GeneralDevice::addAccelerationFilter(unique_ptr<Filter> filter){
     this->accfilters.push_back(std::move(filter));
 }
 
-void Device::addAccelerationListener(shared_ptr<AccelerationListener> listener){
+void GeneralDevice::addAccelerationListener(shared_ptr<AccelerationListener> listener){
     this->accelerationlistener.push_back(listener);
 }
 
-void Device::resetAccelerationFilters(){
+void GeneralDevice::resetAccelerationFilters(){
     for (int i = 0; i < this->accfilters.size(); i++) {
         this->accfilters.at(i).reset();
     }
 }
 
-void Device::addGestureListener(unique_ptr<GestureListener> listener){
-    this->processingunit->addGestureListener(std::move(listener));
+void GeneralDevice::addGestureListener(GestureListener* listener){
+    this->processingunit->addGestureListener(listener);
 }
 
-void Device::addButtonListener(shared_ptr<ButtonListener> listener){
+void GeneralDevice::addButtonListener(shared_ptr<ButtonListener> listener){
     this->buttonlistener.push_back(std::move(listener));
 }
 
-void Device::fireAccelerationEvent(vector<double>& vec){
+void GeneralDevice::fireAccelerationEvent(vector<double>& vec){
     for (int i = 0; i < this->accfilters.size(); i++) {
         vec= this->accfilters.at(i)->filter(vec);
         // cannot return here if null, because of time-dependent accfilters
@@ -65,7 +63,7 @@ void Device::fireAccelerationEvent(vector<double>& vec){
     }
 }
 
-void Device::fireButtonPressedEvent(int button){
+void GeneralDevice::fireButtonPressedEvent(int button){
 //    System.out.println(Quantizer::PI);
     
     shared_ptr<ButtonPressedEvent> w(new ButtonPressedEvent(this, button));
@@ -78,22 +76,9 @@ void Device::fireButtonPressedEvent(int button){
     }
 }
 
-void Device::fireButtonReleasedEvent(int button){
+void GeneralDevice::fireButtonReleasedEvent(int button){
     shared_ptr<ButtonReleasedEvent> w (new ButtonReleasedEvent(button));
     for (int i = 0; i < this->buttonlistener.size(); i++) {
         this->buttonlistener.at(i)->buttonReleaseReceived(w);
-    }
-}
-
-void Device::fireMotionStopEvent(){
-    shared_ptr<MotionStopEvent> w(new MotionStopEvent());
-    for (int i = 0; i < this->accelerationlistener.size(); i++) {
-        this->accelerationlistener.at(i)->motionStopReceived(w);
-    }
-}
-void Device::fireMotionStartEvent(){
-    shared_ptr<MotionStartEvent> w (new MotionStartEvent(this));
-    for (int i = 0; i < this->accelerationlistener.size(); i++) {
-        this->accelerationlistener.at(i)->motionStartReceived(w);
     }
 }

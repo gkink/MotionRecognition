@@ -1,13 +1,13 @@
 //
-//  Device.hpp
+//  GeneralDevice.hpp
 //  WiiGee
 //
 //  Created by Nextep-3 on 19.04.16.
 //  Copyright © 2016 Nextep-3. All rights reserved.
 //
 
-#ifndef Device_hpp
-#define Device_hpp
+#ifndef GeneralDevice_hpp
+#define GeneralDevice_hpp
 
 class ButtonListener;
 
@@ -22,20 +22,18 @@ class ButtonListener;
 
 using namespace std;
 
-class Device {
+class GeneralDevice {
     
 public:
     static const int MOTION = 0;
     
-    Device(bool autofiltering);
+    GeneralDevice(bool autofiltering);
     void addAccelerationFilter(unique_ptr<Filter> filter);
     void addAccelerationListener(shared_ptr<AccelerationListener> listener);
     void resetAccelerationFilters();
     void addButtonListener(shared_ptr<ButtonListener> listener);
-    void addGestureListener(unique_ptr<GestureListener> listener);
+    void addGestureListener(GestureListener* listener);
     
-    void fireMotionStopEvent();
-    void fireMotionStartEvent();
     void fireAccelerationEvent(vector<double>& vec);
     void fireButtonPressedEvent(int button);
     void fireButtonReleasedEvent(int button);
@@ -64,4 +62,4 @@ protected:
     shared_ptr<ProcessingUnit> processingunit{new TriggeredProcessingUnit()};
 };
 
-#endif /* Device_hpp */
+#endif /* "GeneralDevice_hpp */

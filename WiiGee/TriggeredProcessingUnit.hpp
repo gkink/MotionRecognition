@@ -22,8 +22,6 @@ public:
     virtual void accelerationReceived(std::shared_ptr<AccelerationEvent> event) override;
     virtual void buttonPressReceived(std::shared_ptr<ButtonPressedEvent> event) override;
     virtual void buttonReleaseReceived(std::shared_ptr<ButtonReleasedEvent> event) override;
-    virtual void motionStartReceived(std::shared_ptr<MotionStartEvent> event) override {};
-    virtual void motionStopReceived(std::shared_ptr<MotionStopEvent> event) override {};
     
     void handleStartEvent(shared_ptr<ActionStartEvent> event);
     void handleStopEvent(shared_ptr<ActionStopEvent> event);
